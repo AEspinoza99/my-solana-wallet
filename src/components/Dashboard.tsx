@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import WalletInput from "./WalletInput";
 import BalanceCard from "./BalanceCard";
 import RecentTransactions from "./RecentTransactions";
+import { getWalletBalance } from "../services/services";
 
 function Dashboard(): React.ReactElement {
   const [showTransactions, setShowTransactions] = useState(false);
@@ -16,19 +17,14 @@ function Dashboard(): React.ReactElement {
     setError(null);
     setBalance(null);
 
-    // Simulate API call for now
-    setTimeout(() => {
-      // Mock error for short addresses
-      if (walletAddress.length < 10) {
-        setError("Invalid wallet address!");
-        setLoading(false);
-        return;
-      }
-
-      // Mock success
-      setBalance(1.5432);
+    try {
+      const walletBalance = await getWalletBalance(walletAddress);
+      setBalance(walletBalance);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "An error occurred");
+    } finally {
       setLoading(false);
-    }, 2000);
+    }
   };
 
   return (
