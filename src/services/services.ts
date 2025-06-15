@@ -1,8 +1,7 @@
 import { createSolanaRpc, address } from "@solana/kit";
 
 // Create RPC connection to Solana mainnet
-const rpc = createSolanaRpc("https://mainnet.helius-rpc.com/?api-key=demo");
-
+const rpc = createSolanaRpc("https://solana-mainnet.g.alchemy.com/v2/demo");
 export async function getWalletBalance(walletAddress: string): Promise<number> {
   try {
     console.log("Fetching balance for:", walletAddress);
