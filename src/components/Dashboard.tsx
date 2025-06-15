@@ -1,10 +1,35 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import WalletInput from "./WalletInput";
 import BalanceCard from "./BalanceCard";
 import RecentTransactions from "./RecentTransactions";
 
-function Dashboard() {
+function Dashboard(): React.ReactElement {
   const [showTransactions, setShowTransactions] = useState(false);
+  const [balance, setBalance] = useState<number | null>(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  const handleWalletSubmit = async (walletAddress: string) => {
+    console.log("Wallet submitted:", walletAddress);
+
+    setLoading(true);
+    setError(null);
+    setBalance(null);
+
+    // Simulate API call for now
+    setTimeout(() => {
+      // Mock error for short addresses
+      if (walletAddress.length < 10) {
+        setError("Invalid wallet address!");
+        setLoading(false);
+        return;
+      }
+
+      // Mock success
+      setBalance(1.5432);
+      setLoading(false);
+    }, 2000);
+  };
 
   return (
     <main className="min-h-screen p-6">
@@ -17,17 +42,36 @@ function Dashboard() {
             </h1>
           </header>
           <section>
-            <WalletInput />
+            <WalletInput
+              onWalletSubmit={handleWalletSubmit}
+              loading={loading}
+            />
           </section>
 
-          <section>
+          {/*<section>
             <BalanceCard
               onToggleTransactions={() =>
                 setShowTransactions(!showTransactions)
               }
               showTransactions={showTransactions}
+              balance={balance}
+              loading={loading}
+              error={error}
             />
-          </section>
+          </section> */}
+          {(balance !== null || loading || error) && (
+            <section>
+              <BalanceCard
+                onToggleTransactions={() =>
+                  setShowTransactions(!showTransactions)
+                }
+                showTransactions={showTransactions}
+                balance={balance}
+                loading={loading}
+                error={error}
+              />
+            </section>
+          )}
         </article>
 
         {/* RecentTransactions only shows when isVisible */}
