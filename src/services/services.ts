@@ -1,7 +1,7 @@
 import { createSolanaRpc, address } from "@solana/kit";
 
 // Create RPC connection to Solana mainnet
-const rpc = createSolanaRpc("URL: https://api.mainnet-beta.solana.com");
+const rpc = createSolanaRpc("https://api.mainnet-beta.solana.com");
 
 export async function getWalletBalance(walletAddress: string): Promise<number> {
   try {
@@ -17,7 +17,7 @@ export async function getWalletBalance(walletAddress: string): Promise<number> {
 
     // Convert lamports to SOL
     const balanceInSol = Number(balanceResponse.value) / 1_000_000_000;
-    console.log("💰 Balance in SOL:", balanceInSol);
+    console.log("Balance in SOL:", balanceInSol);
 
     return balanceInSol;
   } catch (error) {
