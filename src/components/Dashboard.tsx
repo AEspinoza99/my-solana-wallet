@@ -59,19 +59,18 @@ function Dashboard(): React.ReactElement {
               error={error}
             />
           </section> */}
-          {(balance !== null || loading || error) && (
-            <section>
-              <BalanceCard
-                onToggleTransactions={() =>
-                  setShowTransactions(!showTransactions)
-                }
-                showTransactions={showTransactions}
-                balance={balance}
-                loading={loading}
-                error={error}
-              />
-            </section>
-          )}
+
+          <section>
+            <BalanceCard
+              onToggleTransactions={() =>
+                setShowTransactions(!showTransactions)
+              }
+              showTransactions={showTransactions}
+              balance={balance}
+              loading={loading}
+              error={error}
+            />
+          </section>
         </article>
 
         {/* RecentTransactions only shows when isVisible */}
