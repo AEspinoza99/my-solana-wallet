@@ -1,12 +1,8 @@
+import type { Transaction } from "./transactionType";
+
 type RecentTransactionsProps = {
   isVisible: boolean;
-  transactions?: Array<{
-    id: string;
-    type: "Received" | "Sent";
-    amount: string;
-    time: string;
-    address: string;
-  }>;
+  transactions?: Transaction[];
 };
 
 export default function RecentTransactions({
@@ -14,38 +10,38 @@ export default function RecentTransactions({
   transactions = [],
 }: RecentTransactionsProps) {
   // Mock data for now - later will come from Solana kit API
-  const mockTransactions = [
+  const mockTransactions: Transaction[] = [
     {
       id: "1",
-      type: "Received" as const,
+      type: "Received",
       amount: "+0.5 SOL",
       time: "2 hours ago",
       address: "3Kx7...9Yz2",
     },
     {
       id: "2",
-      type: "Sent" as const,
+      type: "Sent",
       amount: "-0.25 SOL",
       time: "1 day ago",
       address: "7Mx4...3Kl8",
     },
     {
       id: "3",
-      type: "Received" as const,
+      type: "Received",
       amount: "+1.0 SOL",
       time: "3 days ago",
       address: "9Qr6...7Hn5",
     },
     {
       id: "4",
-      type: "Sent" as const,
+      type: "Sent",
       amount: "-0.75 SOL",
       time: "5 days ago",
       address: "2Lp3...8Ym1",
     },
     {
       id: "5",
-      type: "Received" as const,
+      type: "Received",
       amount: "+0.8 SOL",
       time: "1 week ago",
       address: "6Tr9...4Kn7",

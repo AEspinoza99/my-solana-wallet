@@ -1,4 +1,5 @@
 import { createSolanaRpc, address } from "@solana/kit";
+import type { Transaction } from "../components/transactionType";
 
 // Create RPC connection to Solana mainnet
 const rpc = createSolanaRpc("https://api.devnet.solana.com");
