@@ -1,50 +1,5 @@
 @import "tailwindcss";
 
-/* Enhanced mobile input fixes */
-input,
-button,
-select,
-textarea {
-  touch-action: manipulation;
-  -webkit-appearance: none;
-  appearance: none;
-  font-size: 16px !important; /* !important for iOS */
-  -webkit-user-select: text; /* Allow text selection on iOS */
-  user-select: text;
-}
-
-/* Prevent zoom on input focus (iOS specific) */
-input[type="text"],
-input[type="email"],
-input[type="number"],
-input[type="tel"],
-textarea {
-  font-size: 16px !important;
-  transform: none !important; /* Prevent transform issues */
-}
-
-/* Fix for iOS Safari input issues */
-input:focus {
-  outline: none;
-  -webkit-appearance: none;
-  -webkit-box-shadow: none;
-  box-shadow: none;
-}
-
-/* Ensure proper touch targets */
-input,
-button {
-  min-height: 44px; /* Apple's recommended minimum */
-  min-width: 44px;
-}
-
-/* Fix for mobile viewport */
-body {
-  -webkit-text-size-adjust: 100%;
-  -webkit-touch-callout: none;
-  -webkit-tap-highlight-color: transparent;
-}
-
 @layer utilities {
   .gradient-bg {
     @apply relative bg-slate-950;
