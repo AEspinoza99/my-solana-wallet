@@ -9,7 +9,7 @@ export async function getWalletBalance(walletAddress: string): Promise<number> {
     console.log("Fetching balance for:", walletAddress);
 
     // Solana address
-    const walletAddr = address(walletAddress);
+    const walletAddr = address(walletAddress); //converts string to solana wallet obj
     console.log("Address conversion successful");
 
     // balance in lamports
@@ -29,5 +29,38 @@ export async function getWalletBalance(walletAddress: string): Promise<number> {
       error instanceof Error ? error.message : "Unknown error"
     );
     throw new Error("Invalid wallet address or network error");
+  }
+}
+
+export async function getWalletTransactions(
+  walletAddress: string
+): Promise<Transaction[]> {
+  try {
+    console.log("Fetching transactions for:", walletAddress);
+
+    const walletAddr = address(walletAddress);
+    const signatures = await rpc
+      .getSignaturesForAddress(walletAddr, { limit: 5 })
+      .send();
+    console.log("Transaction signatures:", signatures);
+
+    console.log("Full signatures response:", signatures);
+    console.log("Keys in signatures:", Object.keys(signatures));
+    console.log("Type of signatures:", typeof signatures);
+
+    // const transactions: Transaction[] = signatures.value.map((sig) => ({
+    //   id: sig.signature,
+    //   type: Math.random() > 0.5 ? "Received" : "Sent",
+    //   amount: `${Math.random() > 0.5 ? "+" : "-"}${(Math.random() * 2).toFixed(
+    //     2
+    //   )} SOL`,
+    //   time: new Date(sig.blockTime! * 1000).toLocaleDateString(),
+    //   address: `${sig.signature.slice(0, 4)}...${sig.signature.slice(-4)}`,
+    // }));
+
+    return [];
+  } catch (error) {
+    console.error("Error fetching transactions:", error);
+    return [];
   }
 }
