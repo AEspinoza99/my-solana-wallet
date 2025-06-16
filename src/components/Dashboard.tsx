@@ -3,12 +3,15 @@ import WalletInput from "./WalletInput";
 import BalanceCard from "./BalanceCard";
 import RecentTransactions from "./RecentTransactions";
 import { getWalletBalance } from "../services/services";
+import type { Transaction } from "../components/transactionType";
+import { getWalletTransactions } from "../services/services";
 
 function Dashboard(): React.ReactElement {
   const [showTransactions, setShowTransactions] = useState(false);
   const [balance, setBalance] = useState<number | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [transactions, setTransactions] = useState<Transaction[]>([]);
 
   const handleWalletSubmit = async (walletAddress: string) => {
     console.log("Wallet submitted:", walletAddress);
@@ -18,8 +21,13 @@ function Dashboard(): React.ReactElement {
     setBalance(null);
 
     try {
-      const walletBalance = await getWalletBalance(walletAddress);
+      const [walletBalance, walletTransactions] = await Promise.all([
+        getWalletBalance(walletAddress),
+        getWalletTransactions(walletAddress), // This will trigger our debug logs
+      ]);
+
       setBalance(walletBalance);
+      setTransactions(walletTransactions);
     } catch (err) {
       setError(err instanceof Error ? err.message : "An error occurred");
     } finally {
@@ -61,7 +69,10 @@ function Dashboard(): React.ReactElement {
 
         {/* RecentTransactions only shows when isVisible */}
         <aside>
-          <RecentTransactions isVisible={showTransactions} />
+          <RecentTransactions
+            isVisible={showTransactions}
+            transactions={transactions}
+          />
         </aside>
       </section>
     </main>
