@@ -2,9 +2,8 @@ import React, { useState } from "react";
 import WalletInput from "./WalletInput";
 import BalanceCard from "./BalanceCard";
 import RecentTransactions from "./RecentTransactions";
-import { getWalletBalance } from "../services/services";
+import { getWalletBalance, getWalletTransactions } from "../services/services";
 import type { Transaction } from "../components/transactionType";
-import { getWalletTransactions } from "../services/services";
 
 function Dashboard(): React.ReactElement {
   const [showTransactions, setShowTransactions] = useState(false);
