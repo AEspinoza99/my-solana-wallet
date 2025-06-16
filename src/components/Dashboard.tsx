@@ -35,7 +35,7 @@ function Dashboard(): React.ReactElement {
   };
 
   return (
-    <main className="min-h-screen p-6">
+    <main className="min-h-screen p-6 flex items-center justify-center">
       <section className="max-w-md mt-10 mx-auto">
         <article className="bg-slate-800 border border-slate-700 rounded-2xl p-8 shadow-xl">
           <header className="text-center mb-8">
