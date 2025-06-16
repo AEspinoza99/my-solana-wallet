@@ -42,6 +42,10 @@ function WalletInput({
             console.log("Input clicked");
             e.currentTarget.focus();
           }}
+          onTouchStart={(e) => {
+            console.log("Touch started");
+            e.currentTarget.focus();
+          }}
           onChange={(input) => setWalletAddress(input.target.value)}
           value={walletAddress}
           disabled={loading} // Disable input while loading
