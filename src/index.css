@@ -7,7 +7,9 @@ textarea {
   touch-action: manipulation;
   -webkit-appearance: none;
   appearance: none;
-  font-size: 16px; /* Prevents iOS zoom */
+  font-size: 16px !important; /* !important for iOS */
+  -webkit-user-select: text; /* Allow text selection on iOS */
+  user-select: text;
 }
 
 @layer utilities {
